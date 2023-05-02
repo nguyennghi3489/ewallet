@@ -1,8 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 import json
-import os
-from config.api import HOST_NAME, PORT, BASE_PATH
+from config.api import HOST_NAME, PORT
 from api_routes import route_mapper
 
 class EWalletRequestHandler(BaseHTTPRequestHandler):
