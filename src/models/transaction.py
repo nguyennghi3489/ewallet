@@ -24,6 +24,10 @@ class TransactionCreateRequest:
         result = hashlib.md5(data.encode()).hexdigest()
         return result
 
+class TransactionConfirmRequest:
+    def __init__(self, transactionId: str):
+        self.transactionId = transactionId
+
 class Transaction:
     def __init__(self, transactionId: str, merchantId: str, incomeAccount: str, outcomeAccount: str, amount: int, extraData: str, signature: str, status: Status):
         self.merchantId = merchantId

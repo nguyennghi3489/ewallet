@@ -1,6 +1,6 @@
-from services.transaction import create as createTransaction
+from services.transaction import create as createTransaction, confirm as confirmTransaction
 from http.server import BaseHTTPRequestHandler
-from models.transaction import TransactionCreateRequest
+from models.transaction import TransactionCreateRequest, TransactionConfirmRequest
 from models.account import AccountType
 from services.account import checkAccountId
 import json
@@ -32,7 +32,32 @@ def create(req: BaseHTTPRequestHandler):
         req.wfile.write('Create Transaction Failed'.encode())
 
 def confirm(req: BaseHTTPRequestHandler):
-    pass
+    content_length = int(req.headers.get('content-length'))
+    req_body = dict(json.loads(req.rfile.read(content_length).decode()))
+    data = TransactionConfirmRequest(**req_body)
+    token = req.headers.get('Authorization')
+    parsedData = jwt.decode(token, key="secret", algorithms="HS256")
+    if parsedData.get("accountType") != AccountType.PERSONAL.value or checkAccountId(parsedData.get("accountId") == None):
+        req.send_response(400)
+        req.send_header('Content-Type', 'text/plain')
+        req.end_headers()
+        req.wfile.write('JWT error'.encode())
+        return
+    
+    try:
+        result = confirmTransaction(data, parsedData.get("accountId"))
+        print(result)
+        req.send_response(200)
+        req.send_header('Content-Type', 'application/json')
+        req.end_headers()
+        req.wfile.write(json.dumps(result).encode())
+
+    except Exception as err:
+        print(err)
+        req.send_response(400)
+        req.send_header('Content-Type', 'text/plain')
+        req.end_headers()
+        req.wfile.write('Create Transaction Failed'.encode())
 
 def verify(req: BaseHTTPRequestHandler):
     pass

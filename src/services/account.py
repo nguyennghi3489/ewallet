@@ -32,3 +32,7 @@ def topupAccount(request: TopupRequest):
         return respository.account.topupAccount(request)
     except:
         raise
+
+def getAccountById(id: str)->Account|None:
+    merchant = respository.account.getAccountById(id)
+    return merchant
