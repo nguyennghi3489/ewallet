@@ -11,3 +11,13 @@ def create(data: Merchant):
         updateJson(merchants_file_path, merchants)
     except:
         raise
+
+def getMerchantById(merchantId: str):
+    try:
+        accounts = readJson(merchants_file_path)
+        filtered_list = [ i for i in accounts if i["accountId"] == merchantId]
+        if filtered_list:
+            return filtered_list[0]
+        return None
+    except:
+        return None

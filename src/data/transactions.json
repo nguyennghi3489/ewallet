@@ -1,0 +1,22 @@
+[
+  {
+    "merchantId": "ddae9eed-9fbf-4d07-939f-2d2ed5ef2d28",
+    "transactionId": "44b5f014-41f7-42d8-8087-b8cf390964fc",
+    "incomeAccount": "0f5599ba-fcb7-4a91-b97e-c4af3370448f",
+    "outcomeAccount": "26111b84-cabd-404c-8b21-0eb0d5bf68f6",
+    "amount": 100,
+    "extraData": "orderId 100",
+    "signature": "103196046746edbb4f6955a1938b5ddd",
+    "status": "INITIALIZED"
+  },
+  {
+    "merchantId": "cbecbe21-7baf-4697-af84-8c98a6cad430",
+    "transactionId": "44b5f014-41f7-42d8-8087-b8cf390964fc",
+    "incomeAccount": "0f5599ba-fcb7-4a91-b97e-c4af3370448f",
+    "outcomeAccount": "26111b84-cabd-404c-8b21-0eb0d5bf68f6",
+    "amount": 100,
+    "extraData": "orderId 100",
+    "signature": "103196046746edbb4f6955a1938b5ddd",
+    "status": "INITIALIZED"
+  }
+]

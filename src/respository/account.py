@@ -33,5 +33,4 @@ def topupAccount(request: TopupRequest):
         updateJson(accounts_file_path, accounts)
         return True
     except:
-        print("testst")
         return None

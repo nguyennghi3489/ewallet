@@ -8,3 +8,7 @@ def create(requests: MerchantCreateRequest):
     data = Merchant.createMerchant(requests.merchantName, requests.merchantUrl, account.accountId)
     respository.merchant.create(data)
     return data
+
+def getMerchantById(merchantId: str):
+    merchant = respository.merchant.getMerchantById(merchantId)
+    return merchant

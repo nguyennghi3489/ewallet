@@ -14,8 +14,6 @@ def signup(req: BaseHTTPRequestHandler):
         req.end_headers()
         req.wfile.write(json.dumps(result.__dict__).encode())
     except Exception as err:
-        print(err)
-        
         req.send_response(400)
         req.send_header('Content-Type', 'text/plain')
         req.end_headers()
