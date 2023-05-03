@@ -34,3 +34,17 @@ def topupAccount(request: TopupRequest):
         return True
     except:
         return None
+
+def doTransfer(incomeAccountId: str, outcomeAccountId: str, amount: int):
+    try:
+        accounts = readJson(accounts_file_path)
+        incomeAccountIndex = [ index for (index, data) in enumerate(accounts) if data["accountId"] == incomeAccountId]
+        if len(incomeAccountIndex) > 0:
+            accounts[incomeAccountIndex[0]]["balance"] += amount
+        outcomeAccountIndex = [ index for (index, data) in enumerate(accounts) if data["accountId"] == outcomeAccountId]
+        if len(outcomeAccountIndex) > 0:
+            accounts[outcomeAccountIndex[0]]["balance"] -= amount
+        updateJson(accounts_file_path, accounts)
+        return True
+    except:
+        return None

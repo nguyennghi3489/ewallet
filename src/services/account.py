@@ -36,3 +36,10 @@ def topupAccount(request: TopupRequest):
 def getAccountById(id: str)->Account|None:
     merchant = respository.account.getAccountById(id)
     return merchant
+
+def transfer(incomeAccountId: str, outcomeAccountId: str, amount: int):
+    try:
+        return respository.account.doTransfer(incomeAccountId, outcomeAccountId, amount)
+    except:
+        raise
+    

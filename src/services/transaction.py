@@ -1,6 +1,6 @@
-from models.transaction import TransactionCreateRequest, Transaction, TransactionConfirmRequest, Status
+from models.transaction import TransactionCreateRequest, Transaction, TransactionProcessRequest, Status
 from services.merchant import getMerchantById
-from services.account import getAccountById
+from services.account import getAccountById, transfer
 import respository.transaction
 
 def create(requests: TransactionCreateRequest, merchantAccountId: str):
@@ -13,12 +13,14 @@ def create(requests: TransactionCreateRequest, merchantAccountId: str):
     except:
         raise
 
-def confirm(requests: TransactionConfirmRequest, personalId: str):
+def confirm(requests: TransactionProcessRequest, personalId: str):
     try:
         transaction = respository.transaction.getTransactionById(requests.transactionId)
         account = getAccountById(personalId)
         if account == None:
             return {"msg": "Sorry, there is no matched account", "code": "UNK"}
+        if transaction.get("status") != Status.INITIALIZED.value:
+            return {"msg": "Sorry, transaction is not valid state", "code": "UNK"}
         if transaction.get("amount") > account.get("balance"):
             return {"msg": "Sorry, your balance is not valid", "code": "BNE"}
             
@@ -27,5 +29,24 @@ def confirm(requests: TransactionConfirmRequest, personalId: str):
         
     except:
         raise
+
+def verify(requests: TransactionProcessRequest, personalId: str):
+    try:
+        transaction = respository.transaction.getTransactionById(requests.transactionId)
+        account = getAccountById(personalId)
+        if account == None:
+            return {"msg": "Sorry, there is no matched account", "code": "UNK"}
+        if transaction.get("amount") > account.get("balance"):
+            return {"msg": "Sorry, your balance is not valid", "code": "BNE"}
+        if transaction.get("status") != Status.CONFIRMED.value:
+            return {"msg": "Sorry, transaction is not valid state", "code": "UNK"}
+            
+        if respository.transaction.verify(transaction.get("transactionId")):
+            if transfer(transaction.get("incomeAccount"), transaction.get("outcomeAccount"), transaction.get("amount")):
+                return respository.transaction.complete(transaction.get("transactionId"))
+        
+    except:
+        raise
+
 
 

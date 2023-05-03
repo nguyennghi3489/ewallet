@@ -22,13 +22,31 @@ def getTransactionById(id: str)->Transaction:
     except:
         return None
 
-def confirm(transactionId: str):
+def updateState(transactionId: str, state: Status):
     try:
         transactions = readJson(transaction_file_path)
         filtered_index = [ index for (index, data) in enumerate(transactions) if data["transactionId"] == transactionId]
         if len(filtered_index) > 0:
-            transactions[filtered_index[0]]["status"] = Status.CONFIRMED.value
+            transactions[filtered_index[0]]["status"] = state
         updateJson(transaction_file_path, transactions)
         return True
+    except:
+        return None
+
+def confirm(transactionId: str):
+    try:
+        return updateState(transactionId, Status.CONFIRMED.value)
+    except:
+        return None
+
+def verify(transactionId: str):
+    try:
+        return updateState(transactionId, Status.VERIFIED.value)
+    except:
+        return None
+
+def complete(transactionId: str):
+    try:
+        return updateState(transactionId, Status.COMPLETED.value)
     except:
         return None

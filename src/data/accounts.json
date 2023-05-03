@@ -1,17 +1,17 @@
 [
-    {
-        "accountType": "personal",
-        "balance": 11400,
-        "accountId": "26111b84-cabd-404c-8b21-0eb0d5bf68f6"
-    },
-    {
-        "accountType": "merchant",
-        "balance": 0,
-        "accountId": "0f5599ba-fcb7-4a91-b97e-c4af3370448f"
-    },
-    {
-        "accountType": "issuer",
-        "balance": 0,
-        "accountId": "9d0269ab-2f2d-44a6-8c51-b7d56ad57fa5"
-    }
+  {
+    "accountType": "personal",
+    "balance": 7400,
+    "accountId": "26111b84-cabd-404c-8b21-0eb0d5bf68f6"
+  },
+  {
+    "accountType": "merchant",
+    "balance": 4000,
+    "accountId": "0f5599ba-fcb7-4a91-b97e-c4af3370448f"
+  },
+  {
+    "accountType": "issuer",
+    "balance": 0,
+    "accountId": "9d0269ab-2f2d-44a6-8c51-b7d56ad57fa5"
+  }
 ]
