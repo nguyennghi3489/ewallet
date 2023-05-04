@@ -63,5 +63,16 @@ def verify(requests: TransactionProcessRequest, personalId: str):
     except:
         raise
 
+def cancel(requests: TransactionProcessRequest):
+    try:
+        transaction = respository.transaction.getTransactionById(requests.transactionId)
+        if transaction.get("status") != Status.CONFIRMED.value:
+            return {"msg": "Sorry, transaction is not valid state", "code": "UNK"}
+            
+        return respository.transaction.cancel(requests.transactionId)
+        
+    except:
+        raise
+
 
 

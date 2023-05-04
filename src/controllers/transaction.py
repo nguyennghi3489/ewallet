@@ -1,4 +1,4 @@
-from services.transaction import create as createTransaction, confirm as confirmTransaction, verify as verifyTransaction
+from services.transaction import create as createTransaction, confirm as confirmTransaction, verify as verifyTransaction, cancel as cancelTransaction
 from http.server import BaseHTTPRequestHandler
 from models.transaction import TransactionCreateRequest, TransactionProcessRequest
 from models.account import AccountType
@@ -55,7 +55,7 @@ def confirm(req: BaseHTTPRequestHandler):
         req.send_response(400)
         req.send_header('Content-Type', 'text/plain')
         req.end_headers()
-        req.wfile.write('Create Transaction Failed'.encode())
+        req.wfile.write('Confirm Transaction Failed'.encode())
 
 def verify(req: BaseHTTPRequestHandler):
     content_length = int(req.headers.get('content-length'))
@@ -80,9 +80,39 @@ def verify(req: BaseHTTPRequestHandler):
             req.send_response(400)
             req.send_header('Content-Type', 'text/plain')
             req.end_headers()
-            req.wfile.write('Create Transaction Failed'.encode())
+            req.wfile.write('Verify Transaction Failed'.encode())
     except Exception as err:
         req.send_response(400)
         req.send_header('Content-Type', 'text/plain')
         req.end_headers()
-        req.wfile.write('Create Transaction Failed'.encode())
+        req.wfile.write('Verify Transaction Failed'.encode())
+
+def cancel(req: BaseHTTPRequestHandler):
+    content_length = int(req.headers.get('content-length'))
+    req_body = dict(json.loads(req.rfile.read(content_length).decode()))
+    data = TransactionProcessRequest(**req_body)
+    token = req.headers.get('Authorization')
+    parsedData = jwt.decode(token, key="secret", algorithms="HS256")
+    if parsedData.get("accountType") != AccountType.PERSONAL.value or checkAccountId(parsedData.get("accountId") == None):
+        req.send_response(400)
+        req.send_header('Content-Type', 'text/plain')
+        req.end_headers()
+        req.wfile.write('JWT error'.encode())
+        return
+    try:
+        result = cancelTransaction(data)
+        if result:
+            req.send_response(200)
+            req.send_header('Content-Type', 'application/json')
+            req.end_headers()
+            req.wfile.write("OK".encode())
+        else:
+            req.send_response(400)
+            req.send_header('Content-Type', 'text/plain')
+            req.end_headers()
+            req.wfile.write('Cancel Transaction Failed'.encode())
+    except Exception as err:
+        req.send_response(400)
+        req.send_header('Content-Type', 'text/plain')
+        req.end_headers()
+        req.wfile.write('Cancel Transaction Failed'.encode())

@@ -44,4 +44,9 @@ route_mapper.connect(
     None,
     '/transaction/verify',
     controller=controllers.transaction.verify)
+
+route_mapper.connect(
+    None,
+    '/transaction/cancel',
+    controller=controllers.transaction.cancel)
   

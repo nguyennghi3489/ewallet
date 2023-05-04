@@ -61,6 +61,12 @@ def complete(transactionId: str):
     except:
         return None
 
+def cancel(transactionId: str):
+    try:
+        return updateState(transactionId, Status.CANCELED.value)
+    except:
+        return None
+
 def setTransactionsExpire(transactionIds: list[str]):
     try:
         transactions = readJson(transaction_file_path)
