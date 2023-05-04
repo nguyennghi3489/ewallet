@@ -7,7 +7,7 @@
         "amount": 1000,
         "extraData": "orderId 100",
         "signature": "103196046746edbb4f6955a1938b5ddd",
-        "status": "COMPLETED"
+        "status": "EXPIRED"
     },
     {
         "merchantId": "cbecbe21-7baf-4697-af84-8c98a6cad430",
@@ -17,6 +17,94 @@
         "amount": 1000,
         "extraData": "orderId 100",
         "signature": "103196046746edbb4f6955a1938b5ddd",
-        "status": "INITIALIZED"
+        "status": "EXPIRED"
+    },
+    {
+        "merchantId": "bc87ed40-43ed-41e8-ac85-bd343c9381db",
+        "transactionId": "44b5f014-41f7-42d8-8087-b8cf390964fc",
+        "incomeAccount": "0f5599ba-fcb7-4a91-b97e-c4af3370448f",
+        "outcomeAccount": "26111b84-cabd-404c-8b21-0eb0d5bf68f6",
+        "amount": 100,
+        "extraData": "orderId 100",
+        "signature": "103196046746edbb4f6955a1938b5ddd",
+        "status": "CANCELED",
+        "created_at": 1683164368.840617
+    },
+    {
+        "merchantId": "4a050006-2747-41d0-9e28-87d5721fb37b",
+        "transactionId": "44b5f014-41f7-42d8-8087-b8cf390964fc",
+        "incomeAccount": "0f5599ba-fcb7-4a91-b97e-c4af3370448f",
+        "outcomeAccount": "26111b84-cabd-404c-8b21-0eb0d5bf68f6",
+        "amount": 100,
+        "extraData": "orderId 100",
+        "signature": "103196046746edbb4f6955a1938b5ddd",
+        "status": "EXPIRED",
+        "created_at": 1683164449.9819121
+    },
+    {
+        "merchantId": "11298f08-9ce6-4831-83f3-ece43bf3dbd8",
+        "transactionId": "44b5f014-41f7-42d8-8087-b8cf390964fc",
+        "incomeAccount": "0f5599ba-fcb7-4a91-b97e-c4af3370448f",
+        "outcomeAccount": "26111b84-cabd-404c-8b21-0eb0d5bf68f6",
+        "amount": 100,
+        "extraData": "orderId 100",
+        "signature": "103196046746edbb4f6955a1938b5ddd",
+        "status": "FAILED",
+        "created_at": 1683164450.759829
+    },
+    {
+        "merchantId": "1e11377e-8e8e-424c-aa40-1c0dbf0e56bb",
+        "transactionId": "44b5f014-41f7-42d8-8087-b8cf390964fc",
+        "incomeAccount": "0f5599ba-fcb7-4a91-b97e-c4af3370448f",
+        "outcomeAccount": "26111b84-cabd-404c-8b21-0eb0d5bf68f6",
+        "amount": 100,
+        "extraData": "orderId 100",
+        "signature": "103196046746edbb4f6955a1938b5ddd",
+        "status": "COMPLETED",
+        "created_at": 1683167221.061667
+    },
+    {
+        "merchantId": "2b62fa0e-817d-4df9-9682-9102257ab808",
+        "transactionId": "44b5f014-41f7-42d8-8087-b8cf390964fc",
+        "incomeAccount": "0f5599ba-fcb7-4a91-b97e-c4af3370448f",
+        "outcomeAccount": "26111b84-cabd-404c-8b21-0eb0d5bf68f6",
+        "amount": 100,
+        "extraData": "orderId 100",
+        "signature": "103196046746edbb4f6955a1938b5ddd",
+        "status": "VERIFIED",
+        "created_at": 1683168225.938661
+    },
+    {
+        "merchantId": "8ca43eb7-0d80-4fa2-9ca4-411d1c5f63b7",
+        "transactionId": "44b5f014-41f7-42d8-8087-b8cf390964fc",
+        "incomeAccount": "0f5599ba-fcb7-4a91-b97e-c4af3370448f",
+        "outcomeAccount": "26111b84-cabd-404c-8b21-0eb0d5bf68f6",
+        "amount": 100,
+        "extraData": "orderId 100",
+        "signature": "103196046746edbb4f6955a1938b5ddd",
+        "status": "CONFIRMED",
+        "created_at": 1683168231.0021172
+    },
+    {
+        "merchantId": "c302ace6-fe71-46fe-a696-26d61cc85f2c",
+        "transactionId": "44b5f014-41f7-42d8-8087-b8cf390964fc",
+        "incomeAccount": "0f5599ba-fcb7-4a91-b97e-c4af3370448f",
+        "outcomeAccount": "26111b84-cabd-404c-8b21-0eb0d5bf68f6",
+        "amount": 100,
+        "extraData": "orderId 100",
+        "signature": "103196046746edbb4f6955a1938b5ddd",
+        "status": "INITIALIZED",
+        "created_at": 1683168281.903774
+    },
+    {
+        "merchantId": "c153595a-3c47-4fe7-aa3f-df2aa84390a6",
+        "transactionId": "44b5f014-41f7-42d8-8087-b8cf390964fc",
+        "incomeAccount": "0f5599ba-fcb7-4a91-b97e-c4af3370448f",
+        "outcomeAccount": "26111b84-cabd-404c-8b21-0eb0d5bf68f6",
+        "amount": 100,
+        "extraData": "orderId 100",
+        "signature": "103196046746edbb4f6955a1938b5ddd",
+        "status": "INITIALIZED",
+        "created_at": 1683170009.8672051
     }
 ]

@@ -22,6 +22,16 @@ def getTransactionById(id: str)->Transaction:
     except:
         return None
 
+def getAllUnFinishTransaction():
+    try:
+        transactions = readJson(transaction_file_path)
+        filtered_list = [ i for i in transactions if i["status"] == Status.CONFIRMED.value or i["status"] == Status.INITIALIZED.value and i["status"] == Status.VERIFIED.value]
+        if filtered_list:
+            return filtered_list
+        return None
+    except:
+        return None
+
 def updateState(transactionId: str, state: Status):
     try:
         transactions = readJson(transaction_file_path)
@@ -48,5 +58,17 @@ def verify(transactionId: str):
 def complete(transactionId: str):
     try:
         return updateState(transactionId, Status.COMPLETED.value)
+    except:
+        return None
+
+def setTransactionsExpire(transactionIds: list[str]):
+    try:
+        transactions = readJson(transaction_file_path)
+        filtered_index = [ index for (index, data) in enumerate(transactions) if data["transactionId"] in transactionIds]
+        if len(filtered_index) > 0 and filtered_index != None:
+            for i in filtered_index:
+                transactions[i].get["status"] = Status.EXPIRED.value
+        updateJson(transaction_file_path, transactions)
+        return True
     except:
         return None

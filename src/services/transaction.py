@@ -1,8 +1,23 @@
+import time
 from models.transaction import TransactionCreateRequest, Transaction, TransactionProcessRequest, Status
 from services.merchant import getMerchantById
 from services.account import getAccountById, transfer
 import respository.transaction
 
+def checkTransactionExpire():
+    try:
+        expiredList = []
+        result = respository.transaction.getAllUnFinishTransaction()
+        if result != None:
+            for i in result:
+                if i.get('created_at') != None:
+                    if time.time() - i.get('created_at') > 60*5:
+                        expiredList.append(i.get('transactionId'))
+            if len(expiredList) > 0:
+                respository.transaction.setTransactionsExpire(expiredList)
+    except:
+        raise
+    
 def create(requests: TransactionCreateRequest, merchantAccountId: str):
     try:
         merchant = getMerchantById(merchantAccountId)

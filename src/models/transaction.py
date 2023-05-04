@@ -1,8 +1,8 @@
 from enum import Enum
 import hashlib
-import bencode
 from models.merchant import Merchant
 import uuid
+import time
 
 class Status(Enum):
     INITIALIZED = 'INITIALIZED'
@@ -29,7 +29,7 @@ class TransactionProcessRequest:
         self.transactionId = transactionId
 
 class Transaction:
-    def __init__(self, transactionId: str, merchantId: str, incomeAccount: str, outcomeAccount: str, amount: int, extraData: str, signature: str, status: Status):
+    def __init__(self, transactionId: str, merchantId: str, incomeAccount: str, outcomeAccount: str, amount: int, extraData: str, signature: str, status: Status, created_at: float):
         self.merchantId = merchantId
         self.transactionId = transactionId
         self.incomeAccount = incomeAccount
@@ -38,6 +38,7 @@ class Transaction:
         self.extraData = extraData
         self.signature = signature
         self.status = status
+        self.created_at = created_at
     def create(merchant: Merchant, buyerId: str, amount: int, extraData: str, signature:str):
         transactionId = str(uuid.uuid4())
-        return Transaction(merchant.get("merchantId"), transactionId, merchant.get("accountId"), buyerId, amount, extraData, signature, Status.INITIALIZED.value)
+        return Transaction(merchant.get("merchantId"), transactionId, merchant.get("accountId"), buyerId, amount, extraData, signature, Status.INITIALIZED.value, time.time())
